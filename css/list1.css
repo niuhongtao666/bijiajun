@@ -1,0 +1,215 @@
+html,body {height: 100%;}
+@media screen and (max-width: 560px) {
+	body {padding: 0px; margin:0px; background:url(../images/background1.png) ; background-position: center; background-size: cover; background-attachment: fixed; background-repeat: no-repeat;background-size: cover;}
+	.header{
+		width: 100%;
+    		height: 0.6rem;
+    		background: url(../images/icon1.gif) no-repeat 0.12rem center;
+    		background-size: 0.48rem 0.52rem;
+    		font-family: PingFangSC-Regular;
+    		font-size: 14px;
+    		box-sizing: border-box; 
+    		padding-left: 0.65rem;
+    		color: #fff;
+    		text-align: left;
+    		line-height: 0.58rem;
+    		border-bottom: 1px solid #fff;
+    		padding-bottom: 0.1rem;
+	}
+	.search{
+		width: 100%;
+		height: 0.52rem;
+		padding: 0.12rem 0.12rem;
+		/*background: red;*/
+		box-sizing: border-box;
+		border-bottom: 1px solid #fff;
+		position: relative;
+	}
+	.search .left{
+		width: 78.9%;
+    		height: 0.28rem;
+    		float: left;
+    		position: relative;
+    		/* padding-right: 0.78rem; */
+    		box-sizing: border-box;
+    		overflow-x: scroll;
+	}
+	.search .right{
+		width: 20%;
+		height: 0.28rem;
+		background: gold;*/
+		float: left;
+		position: absolute;
+		right: 0.13rem;
+    		top: 0.119rem;
+    		background: rgba(0,0,0,0.5);
+		border-radius: 0 0.5rem 0.5rem 0;
+		outline: none;
+	}
+	.search .left input{
+		width: 100%;
+		height: 0.28rem;
+		position: absolute;
+		left: 0;
+		top: 0;
+		outline: none;
+		border: none;
+		padding-left: 0.13rem;
+		box-sizing: border-box;
+		background: rgba(0,0,0,0.5);
+		border-radius: 0.5rem 0 0 0.5rem;
+		color: #fff;
+	}
+	.search-icon1 {
+	    padding:0px;
+	    outline:none;
+	    position: relative;
+	    z-index: 2;
+	    cursor: pointer;
+	    -webkit-transition: all 0.3s ease-in-out;
+	    -moz-transition: all 0.3s ease-in-out;
+	    transition: all 0.3s ease-in-out;
+	}
+	.search-icon1 span {
+	    width:0.16rem;
+	    height:0.16rem;
+	    display: inline-block;
+	    /*vertical-align: middle;*/
+	    position:absolute;
+	    left: 50%;
+	    top: 50%;
+	    margin-left: -0.08rem;
+	    margin-top: -0.08rem;
+	    -webkit-transform: rotate(45deg);
+	    -moz-transform: rotate(45deg);
+	    transform: rotate(45deg);
+	    -webkit-transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+	    -moz-transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+	    transition: all .4s cubic-bezier(0.650, -0.600, 0.240, 1.650);
+	}
+	.search-icon1 span::before,.search-icon1 span::after {
+	    position: absolute;
+	    content:'';
+	}
+	.search-icon1 span::before {
+	   width: 4px;
+	    height: 11px;
+	    left: 17.2px;
+	    top: -2px;
+	    border-radius: 2px;
+	    background: #974BE0;
+	    transform: rotateZ(70deg);
+	    -ms-transform:rotateZ(70deg); 	/* IE 9 */
+		-moz-transform:rotateZ(70deg); 	/* Firefox */
+		-webkit-transform:rotateZ(70deg); /* Safari 和 Chrome */
+		-o-transform:rotateZ(70deg); 	/* Opera */
+	}
+	.search-icon1 span::after {
+	    width: 14px;
+	    height: 14px;
+	    left: -6px;
+	    top: -1px;
+	    border-radius: 16px;
+	    border: 4px solid #974BE0;
+	}
+	.header1{
+		width: 100%;
+    		height: 0.4rem;
+    		padding: 0.05rem 0.12rem;
+    		box-sizing: border-box;
+    		border-bottom: 1px solid #fff;
+    		font-family: PingFangSC-Regular;
+    		font-size: 14px;
+    		box-sizing: border-box;
+    		padding-left: 0.2rem;
+    		color: #fff;
+    		text-align: left;
+    		line-height: 0.3rem;
+	}
+	.header1 span{
+		color: orangered;
+		position: relative;
+    		top: 0.01rem;
+	}
+	.products{
+		width: 100%;
+		padding-top: 0.05rem;
+		padding-left: 0.12rem;
+		padding-right: 0.12rem;
+		box-sizing: border-box;
+		/*height: 1.3rem;*/
+		/*background: red;*/
+	}
+	.products .product{
+		width: 100%;
+    		height: 1.2rem;
+    		background: currentcolor;
+    		/*border-bottom: 1px solid yellow;*/
+    		padding: 0.05rem;
+    		box-sizing: border-box;
+	}
+	.products li+li{
+    		margin-top: 0.05rem;
+	}
+	.products .product .left{
+		width: 30%;
+		height: 1.1rem;
+		background: red;
+		float: left;
+		margin-right: 0.03rem;
+	}
+	.products .product .left img{
+		width: 100%;
+		height: 100%;
+	}
+	.products .product .right{
+		width: 69%;
+		height: 1.1rem;
+		/*background: yellow;*/
+		float: left;
+	}
+	.products .product .right .p1{
+		width: 100%;
+		font-family: PingFangSC-Regular;
+    		font-size: 0.12rem;
+    		color: #fff;
+    		/*text-align: center;*/
+    		box-sizing: border-box;
+    		padding-left: 0.1rem;
+    		/*margin-top: 0.01rem;*/
+	}
+	.products .product .right .p2{
+		width: 100%;
+    		font-family: PingFangSC-Regular;
+    		font-size: 0.17rem;
+    		color: orangered;
+    		/* text-align: center; */
+    		box-sizing: border-box;
+    		padding-left: 0.1rem;
+    		margin-top: 0.1rem;
+	}
+	.products .product .right .p3{
+		width: 100%;
+    		font-family: PingFangSC-Regular;
+    		font-size: 0.12rem;
+    		color: #fff;
+    		/* text-align: center; */
+    		box-sizing: border-box;
+    		padding-left: 0.1rem;
+    		margin-top: 0.07rem;
+	}
+}
+@media screen and (max-width: 320px) {
+	.products .product .right .p3{
+		position: relative;
+    		font-family: PingFangSC-Regular;
+    		font-size: 0.12rem;
+    		color: #fff;
+    		/* text-align: center; */
+    		box-sizing: border-box;
+    		padding-left: 0.1rem;
+    		margin-top: 0.07rem;
+    		top: -0.29rem;
+    		left: 1rem;
+	}
+}
