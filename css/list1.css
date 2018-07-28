@@ -154,7 +154,7 @@ html,body {height: 100%;}
 	.products .product .left{
 		width: 30%;
 		height: 1.1rem;
-		background: red;
+		/*background: red;*/
 		float: left;
 		margin-right: 0.03rem;
 	}

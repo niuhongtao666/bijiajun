@@ -13,6 +13,7 @@
 		<link rel="stylesheet" href="css/list1.css" />
 		<script src="lib/jquery/jquery.min.js"></script>
 		<script src="js/adaptationZ.js"></script>
+		<script src="js/baiduTemplate.js"></script>
 		<script src="js/index.js"></script>
 		<!--[if IE]>
 			<script src="lib/html5shiv/html5shiv.min.js"></script>
@@ -25,19 +26,29 @@
 			<div class="left"><input type="text" id="searchLeft" placeholder="请输入你想要比价的商品"/></div>
 			<div class="right search-icon1"><span></span></div>
 		</div>
-		<div class="header1">首页 &gt 搜索 : <span>苹果手机</span></div>
-		<ul class="products">
-			<li class="product">
-				<div class="left">
-					<img src="icon.ico" alt="" />
-				</div>
-				<div class="right">
-					<div class="p1">Apple MacBook Air 13.3英寸笔记本电脑 银色(2017款Core i5 处理器/8GB内存/256GB闪存 MQD42CH/A)</div>
-					<div class="p2">￥7898.00</div>
-					<div class="p3">京东商城 (自营)</div>
-				</div>
-			</li>
-			<!--<li class="product"></li>-->
+		<div class="header1">首页 &gt 搜索 : <span id="con"></span></div>
+		<ul class="products" id="productsId">
+			<!--商品列表-->
 		</ul>
 	</body>
+	<script id="part1" type="text/html">
+		<%if(list.length) { %>
+			<%for(var i=0;i<list.length;i++){%>
+	             <li class="product">
+					<a href=<%=list[i].shopAddr%>>
+						<div class="left">
+							<img src=<%=list[i].shopImg%> alt="商品图片" />
+						</div>
+						<div class="right">
+							<div class="p1"><%=list[i].shopTitle%></div>
+							<div class="p2"><%=list[i].shopPrice%></div>
+							<div class="p3"><%=list[i].shopType%></div>
+						</div>
+					</a>
+				</li>
+	        <%}%>
+	        <%}else{%>
+        				<h2>没有list数据</h2>   
+    			<%}%>
+	</script>
 </html>
