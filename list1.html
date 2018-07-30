@@ -20,9 +20,11 @@
 		<title>比价君</title>
 		<link rel="shortcut icon" href="/icon.ico" type="image/x-icon" />
 		<link rel="stylesheet" href="css/base.css" />
+		<!--<link rel="stylesheet" href="bootstrap/css/bootstrap.min.css" />-->
 		<link rel="stylesheet" href="css/list1.css" />
 		<link rel="stylesheet" href="css/dropload.css" />
 		<script src="lib/jquery/jquery.min.js"></script>
+		<!--<script src="bootstrap/js/bootstrap.min.js"></script>-->
 		<script src="js/adaptationZ.js"></script>
 		<script src="js/baiduTemplate.js"></script>
 		<script src="js/dropload.min.js"></script>
@@ -33,6 +35,9 @@
 		<![endif]-->
 	</head>
 	<body>
+		<div class="da" role="alert">
+			亲，数据有些少哦，刷新或搜搜别的^_^！
+		</div>
 		<div class="header">比价君--更好的比价 更好的生活</div>
 		<div class="search">
 			<div class="left"><input type="text" id="searchLeft" placeholder="请输入你想要比价的商品"/></div>
@@ -83,7 +88,7 @@
 			<%for(var i=0;i<list1.length;i++){%>
 				<li class="ss1">
 					<%=list1[i].name%>
-					<input type="hidden" value=<%=list1[i].mallId%> />
+					<input type="hidden" class="vvl" value=<%=list1[i].mallId%> />
 				</li>
 	        <%}%>
 	     <%}else{%>

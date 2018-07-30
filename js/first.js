@@ -5,7 +5,7 @@ $(function(){
 		var firSearch=$("#firstSearch").val();
 		console.log(firSearch);
 		sessionStorage.setItem('vall',firSearch); // 存入一个值
-		if(firSearch&&firSearch!=""){
+		if(firSearch&&firSearch!=" "){
 			window.location.href="list1.html";
 		}
 	})

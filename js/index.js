@@ -1,11 +1,17 @@
 $(function(){
 	var vallu=sessionStorage.getItem('vall');
 	var pageNum;
+	var mal=sessionStorage.getItem('mall');
+	console.log(mal);
 	if(vallu){
 		pageNum="1";
-		list(vallu,pageNum,"");
+		if(mal){
+			list(vallu,pageNum,mal);
+		}else{
+			list(vallu,pageNum,"");
+		}
 	};
-	var malId="";
+//	var malId="";
 	$(".search-icon1").on("click",function(){
 		var list1Search=$("#searchLeft").val();
 		sessionStorage.setItem('vall',list1Search); // 存入一个值
@@ -63,6 +69,8 @@ $(function(){
 		            console.log(result) //console变量在ie低版本下不能用
 		            // alert(result.showapi_res_code)
 		            if(result.showapi_res_body.ret_code==0){
+		            		$('.da').css("display","none");
+		            		$('.dropload-load').css("display","block");
 		            		 var productData=result.showapi_res_body.shopList;
 		            		 console.log(productData);
 		                //使用baidu.template命名空间
@@ -71,6 +79,110 @@ $(function(){
 		    			  	//最简使用方法
 		    				 var html=bt('part1',data);
 		            		 document.getElementById('productsId').innerHTML=html;
+		            		 /*上拉刷新开始*/
+						$('.ll').dropload({
+					        scrollArea : window,
+					        loadDownFn : function(me){
+							    function formatterDateTime1() {
+							        var date=new Date()
+							        var month=date.getMonth() + 1
+							        var datetime = date.getFullYear()
+							            + ""// "年"
+							            + (month >= 10 ? month : "0"+ month)
+							            + ""// "月"
+							            + (date.getDate() < 10 ? "0" + date.getDate() : date
+							                .getDate())
+							            + ""
+							            + (date.getHours() < 10 ? "0" + date.getHours() : date
+							                .getHours())
+							            + ""
+							            + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date
+							                .getMinutes())
+							            + ""
+							            + (date.getSeconds() < 10 ? "0" + date.getSeconds() : date
+							                .getSeconds());
+							        return datetime;
+							    }
+					            pageNum++;
+					            var appid1="71044";
+							    var sec1="43791a3aa8e14eeb9b10bb736b86a6a3";
+							   	var keyword1=$('#con').text();
+							   	var mal1=sessionStorage.getItem('mall');
+							   	var malId;
+							   	if(mal1){
+							   		malId=mal1;
+							   	}else{
+							   		malId="";
+							   	}
+							    console.log(keyword1);
+							    console.log(pageNum);
+					            // 拼接HTML
+					            var result = '';
+					            $.ajax({
+					                 type: 'post',
+							        url: 'http://route.showapi.com/1615-1',
+							        dataType: 'json',
+							        data: {
+							            "showapi_timestamp": formatterDateTime1(),
+							            "showapi_appid": appid1, //这里需要改成自己的appid
+							            "showapi_sign": sec1,  //这里需要改成自己的应用的密钥secret
+							            "keyWords":keyword1,
+							            "page":pageNum,
+							            "mallId":malId
+							        },
+					                success: function(data){
+					                		console.log(data);
+					                		if(data.showapi_res_body.ret_code==0){
+		            							$('.da').css("display","none");
+		            							$('.dropload-load').css("display","block");
+						                		var dataArr=data.showapi_res_body.shopList;
+							                var arrLen=data.showapi_res_body.shopList.length;
+							                if(arrLen){
+						                      for(var i=0; i<arrLen; i++){
+						                          result += ' <li class="product">'
+									                          +'<a href='+dataArr[i].shopAddr+'>'
+																	+'<div class="left">'
+																		+'<img src="'+dataArr[i].shopImg+'" alt="商品图片" />'
+																	+'</div>'
+																	+'<div class="right">'
+																		+'<div class="p1">'+dataArr[i].shopTitle+'</div>'
+																		+'<div class="p2">'+dataArr[i].shopPrice+'</div>'
+																		+'<div class="p3">'+dataArr[i].shopType+'</div>'
+																	+'</div>'
+																+'</a>'
+															+'</li>';
+						                      		}
+						//                  // 如果没有数据
+							                  }else{
+						//                      // 锁定
+							                      me.lock();
+						//                      // 无数据
+							                      me.noData();
+							                  }
+						//                  // 为了测试，延迟1秒加载
+						                  setTimeout(function(){
+						//                      // 插入数据到页面，放到最后面
+						                      $('#productsId').append(result);
+						                      // 每次数据插入，必须重置
+						                      me.resetload();
+						                  },1000);
+					                		}else{
+		            							$('.da').css("display","block");
+		            							$('.dropload-load').css("display","none");
+					                		}
+					                },
+					                error: function(xhr, type){
+					                    alert('Ajax error!');
+					                    // 即使加载出错，也得重置
+					                    me.resetload();
+					                }
+					            });
+					        }
+					    });
+						/*上拉刷新结束*/
+		            }else{
+		            		$('.da').css("display","block");
+		            		$('.dropload-load').css("display","none");
 		            };
 		           
 		        }
@@ -78,95 +190,6 @@ $(function(){
 	   }
     
        /*商品搜索结束*/
-	/*上拉刷新开始*/
-	$('.ll').dropload({
-        scrollArea : window,
-        loadDownFn : function(me){
-		    function formatterDateTime1() {
-		        var date=new Date()
-		        var month=date.getMonth() + 1
-		        var datetime = date.getFullYear()
-		            + ""// "年"
-		            + (month >= 10 ? month : "0"+ month)
-		            + ""// "月"
-		            + (date.getDate() < 10 ? "0" + date.getDate() : date
-		                .getDate())
-		            + ""
-		            + (date.getHours() < 10 ? "0" + date.getHours() : date
-		                .getHours())
-		            + ""
-		            + (date.getMinutes() < 10 ? "0" + date.getMinutes() : date
-		                .getMinutes())
-		            + ""
-		            + (date.getSeconds() < 10 ? "0" + date.getSeconds() : date
-		                .getSeconds());
-		        return datetime;
-		    }
-            pageNum++;
-            var appid1="71044";
-		    var sec1="43791a3aa8e14eeb9b10bb736b86a6a3";
-		   	var keyword1=$('#con').text();
-		    console.log(keyword1);
-		    console.log(pageNum);
-            // 拼接HTML
-            var result = '';
-            $.ajax({
-                 type: 'post',
-		        url: 'http://route.showapi.com/1615-1',
-		        dataType: 'json',
-		        data: {
-		            "showapi_timestamp": formatterDateTime1(),
-		            "showapi_appid": appid1, //这里需要改成自己的appid
-		            "showapi_sign": sec1,  //这里需要改成自己的应用的密钥secret
-		            "keyWords":keyword1,
-		            "page":pageNum,
-		            "mallId":malId
-		        },
-                success: function(data){
-                		console.log(data);
-                		if(data.showapi_res_body.ret_code==0){
-	                		var dataArr=data.showapi_res_body.shopList;
-		                var arrLen=data.showapi_res_body.shopList.length;
-		                if(arrLen){
-	                      for(var i=0; i<arrLen; i++){
-	                          result += ' <li class="product">'
-				                          +'<a href='+dataArr[i].shopAddr+'>'
-												+'<div class="left">'
-													+'<img src="'+dataArr[i].shopImg+'" alt="商品图片" />'
-												+'</div>'
-												+'<div class="right">'
-													+'<div class="p1">'+dataArr[i].shopTitle+'</div>'
-													+'<div class="p2">'+dataArr[i].shopPrice+'</div>'
-													+'<div class="p3">'+dataArr[i].shopType+'</div>'
-												+'</div>'
-											+'</a>'
-										+'</li>';
-	                      		}
-	//                  // 如果没有数据
-		                  }else{
-	//                      // 锁定
-		                      me.lock();
-	//                      // 无数据
-		                      me.noData();
-		                  }
-	//                  // 为了测试，延迟1秒加载
-	                  setTimeout(function(){
-	//                      // 插入数据到页面，放到最后面
-	                      $('#productsId').append(result);
-	                      // 每次数据插入，必须重置
-	                      me.resetload();
-	                  },1000);
-                		}
-                },
-                error: function(xhr, type){
-                    alert('Ajax error!');
-                    // 即使加载出错，也得重置
-                    me.resetload();
-                }
-            });
-        }
-    });
-	/*上拉刷新结束*/
 	/*index.html结束*/
 	$('#con2').on('click',function(event){
 		event.stopPropagation();
@@ -238,6 +261,10 @@ $(function(){
 	/*商城获取结束*/
 	$('body').on('click','.ss1',function(){
 		console.log($(this));
-		console.log($(this).innerText);
+		console.log($(this).find('.vvl').val());
+//		$(this).addClass("act");
+		var mmId=$(this).find('.vvl').val();
+		sessionStorage.setItem('mall',mmId); // 存入一个值
+		window.location.reload();
 	})
 })
